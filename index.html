@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080D19">
+<title>STUDIO CRAFT</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+--bg:#080D19;
+--card:#101A2C;
+--blue:#3985FF;
+--light:#70B7FF;
+--muted:#91A5C2;
+}
+
+body{
+background:var(--bg);
+color:#fff;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+body:before{
+content:"";
+position:fixed;
+width:350px;
+height:350px;
+background:#1264FF;
+filter:blur(150px);
+opacity:.13;
+top:100px;
+left:-180px;
+pointer-events:none;
+}
+
+.container{
+width:min(100% - 30px,760px);
+margin:auto;
+position:relative;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:20;
+background:#080D19DD;
+backdrop-filter:blur(20px);
+border-bottom:1px solid #263B5B;
+}
+
+.nav{
+height:75px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.brand-icon{
+width:43px;
+height:43px;
+display:grid;
+place-items:center;
+border-radius:14px;
+background:linear-gradient(135deg,#3985FF,#1744A0);
+box-shadow:0 0 25px #3985FF55;
+font-size:23px;
+}
+
+.brand-name{
+font-weight:900;
+font-size:19px;
+letter-spacing:1px;
+}
+
+.brand-name span{color:#58A3FF}
+
+.brand-sub{
+font-size:9px;
+letter-spacing:2px;
+color:#829DBF;
+margin-top:3px;
+}
+
+.online{
+font-size:10px;
+color:#58E6A6;
+background:#12372C;
+padding:8px 11px;
+border-radius:30px;
+}
+
+.hero{
+margin:27px 0;
+padding:28px 23px;
+border:1px solid #294A78;
+border-radius:25px;
+background:
+radial-gradient(ellipse at top right,#225EB855,transparent 65%),
+linear-gradient(135deg,#132B4D,#10182D 70%);
+box-shadow:0 15px 50px #0005;
+overflow:hidden;
+position:relative;
+}
+
+.hero-label{
+font-size:10px;
+font-weight:800;
+letter-spacing:2px;
+color:#75B8FF;
+}
+
+.hero h1{
+font-size:clamp(29px,7vw,43px);
+line-height:1.12;
+margin:19px 0 13px;
+}
+
+.hero h1 span{
+color:#65ACFF;
+text-shadow:0 0 25px #3985FF77;
+}
+
+.hero p{
+color:#B0C2DC;
+line-height:1.7;
+font-size:14px;
+max-width:450px;
+}
+
+.hero-bottom{
+margin-top:24px;
+display:flex;
+align-items:center;
+gap:9px;
+}
+
+.hero-tag{
+font-size:11px;
+padding:9px 13px;
+border:1px solid #4777B5;
+background:#17345A;
+border-radius:30px;
+color:#C6E0FF;
+}
+
+.search-box{
+display:flex;
+align-items:center;
+gap:12px;
+padding:16px;
+border:1px solid #263C5C;
+background:#101A2C;
+border-radius:15px;
+transition:.25s;
+}
+
+.search-box:focus-within{
+border-color:var(--blue);
+box-shadow:0 0 20px #3985FF22;
+}
+
+.search-box span{font-size:18px}
+
+.search-box input{
+width:100%;
+border:none;
+outline:none;
+background:transparent;
+color:white;
+font-size:14px;
+}
+
+.search-box input::placeholder{color:#7186A5}
+
+.section-heading{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:34px 0 17px;
+}
+
+.section-heading h2{
+font-size:20px;
+}
+
+.section-heading span{
+font-size:11px;
+color:#75B8FF;
+}
+
+.post{
+background:linear-gradient(145deg,#15233A,#101827);
+border:1px solid #293F5E;
+border-radius:20px;
+overflow:hidden;
+margin-bottom:22px;
+box-shadow:0 12px 30px #0003;
+animation:appear .5s ease;
+}
+
+@keyframes appear{
+from{opacity:0;transform:translateY(16px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+.post-image{
+width:100%;
+display:block;
+max-height:460px;
+object-fit:cover;
+background:#111D31;
+}
+
+.post-content{padding:17px}
+
+.post-date{
+font-size:11px;
+color:#7FA4D2;
+margin-bottom:14px;
+}
+
+.copy-button{
+width:100%;
+padding:15px;
+border:1px solid #62A6FF;
+border-radius:13px;
+background:linear-gradient(110deg,#2563EB,#168BFF);
+color:white;
+font-size:13px;
+font-weight:900;
+letter-spacing:1px;
+box-shadow:0 0 22px #2478FF44;
+cursor:pointer;
+transition:.2s;
+}
+
+.copy-button:active{transform:scale(.97)}
+
+.post-text{
+color:#D8E4F4;
+font-size:14px;
+line-height:1.8;
+margin-top:17px;
+white-space:pre-wrap;
+overflow-wrap:anywhere;
+}
+
+.empty{
+text-align:center;
+padding:48px 20px;
+border:1px dashed #365274;
+border-radius:20px;
+background:#101A2C;
+}
+
+.empty-icon{
+font-size:43px;
+margin-bottom:15px;
+}
+
+.empty h3{
+font-size:17px;
+margin-bottom:9px;
+}
+
+.empty p{
+font-size:13px;
+line-height:1.6;
+color:#91A5C2;
+}
+
+.empty-line{
+height:3px;
+width:45px;
+background:#3985FF;
+border-radius:10px;
+margin:20px auto 0;
+box-shadow:0 0 15px #3985FF;
+}
+
+footer{
+margin-top:45px;
+padding:27px 10px;
+border-top:1px solid #20334E;
+text-align:center;
+color:#7186A5;
+font-size:11px;
+line-height:2;
+}
+
+#toast{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translate(-50%,20px);
+opacity:0;
+background:#116B4A;
+color:white;
+padding:13px 20px;
+border-radius:12px;
+font-size:13px;
+z-index:50;
+transition:.25s;
+pointer-events:none;
+white-space:nowrap;
+}
+
+#toast.show{
+opacity:1;
+transform:translate(-50%,0);
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+
+<div class="brand">
+<div class="brand-icon">✦</div>
+<div>
+<div class="brand-name">STUDIO <span>CRAFT</span></div>
+<div class="brand-sub">CREATIVE COMMUNITY</div>
+</div>
+</div>
+
+<div class="online">● ONLINE</div>
+
+</div>
+</header>
+
+<main class="container">
+
+<section class="hero">
+
+<div class="hero-label">✦ BIENVENIDO A STUDIO CRAFT</div>
+
+<h1>
+Tu contenido.<br>
+Tu espacio.<br>
+<span>Tu comunidad.</span>
+</h1>
+
+<p>
+Descubre publicaciones, imágenes, información,
+recursos y contenido compartido por Studio Craft.
+Todo en un mismo lugar.
+</p>
+
+<div class="hero-bottom">
+<div class="hero-tag">✦ EXPLORAR</div>
+<div class="hero-tag">⚡ NOVEDADES</div>
+</div>
+
+</section>
+
+<div class="search-box">
+<span>⌕</span>
+<input
+id="search"
+type="search"
+placeholder="Buscar publicaciones..."
+autocomplete="off">
+</div>
+
+<div class="section-heading">
+<h2>Últimas publicaciones</h2>
+<span>STUDIO CRAFT ✦</span>
+</div>
+
+<section id="publications">
+
+<div class="empty">
+<div class="empty-icon">✦</div>
+<h3>Bienvenido a Studio Craft</h3>
+<p>
+Todavía no hay publicaciones.<br>
+Pronto encontrarás contenido nuevo aquí.
+</p>
+<div class="empty-line"></div>
+</div>
+
+</section>
+
+</main>
+
+<footer>
+<strong>STUDIO CRAFT</strong><br>
+Un espacio para compartir y descubrir.<br>
+© 2026 Studio Craft. Todos los derechos reservados.
+</footer>
+
+<div id="toast">✓ Texto copiado correctamente</div>
+
+<script>
+
+// Preparado para conectar con Supabase.
+
+let publications = [];
+
+function renderPosts(list = publications){
+
+const container = document.getElementById("publications");
+container.innerHTML = "";
+
+const ordered = [...list].sort((a,b) =>
+new Date(b.created_at) - new Date(a.created_at)
+);
+
+if(!ordered.length){
+
+container.innerHTML = `
+<div class="empty">
+<div class="empty-icon">✦</div>
+<h3>No hay publicaciones</h3>
+<p>Próximamente encontrarás contenido nuevo aquí.</p>
+<div class="empty-line"></div>
+</div>`;
+
+return;
+}
+
+ordered.forEach(post => {
+
+const article = document.createElement("article");
+article.className = "post";
+
+if(post.image){
+
+const img = document.createElement("img");
+img.className = "post-image";
+img.src = post.image;
+img.alt = "Imagen de la publicación";
+img.loading = "lazy";
+
+article.appendChild(img);
+}
+
+const content = document.createElement("div");
+content.className = "post-content";
+
+const date = document.createElement("div");
+date.className = "post-date";
+
+date.textContent = post.created_at
+? new Date(post.created_at).toLocaleDateString("es-ES")
+: "";
+
+const button = document.createElement("button");
+button.className = "copy-button";
+button.textContent = "📋 COPIAR INFORMACIÓN";
+
+button.addEventListener("click", async () => {
+
+try{
+
+await navigator.clipboard.writeText(post.text || "");
+
+const toast = document.getElementById("toast");
+toast.classList.add("show");
+
+setTimeout(() => {
+toast.classList.remove("show");
+},2000);
+
+}catch{
+alert("No se pudo copiar el texto.");
+}
+
+});
+
+const text = document.createElement("div");
+text.className = "post-text";
+text.textContent = post.text || "";
+
+content.append(date,button,text);
+article.appendChild(content);
+container.appendChild(article);
+
+});
+
+}
+
+document.getElementById("search").addEventListener("input", e => {
+
+const query = e.target.value.toLowerCase();
+
+const filtered = publications.filter(post =>
+(post.text || "").toLowerCase().includes(query)
+);
+
+renderPosts(filtered);
+
+});
+
+renderPosts();
+
+</script>
+
+</body>
+</html>
